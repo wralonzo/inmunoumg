@@ -1,0 +1,111 @@
+<form id="formdepto" class="flex items-center justify-center flex-1" method='POST' action="<?php echo base_url(); ?>Sucursal/update/<?php echo $sucursal->id_sucursal; ?>">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <h1 class="text-3xl font-bold text-gray-500 text-center">Actualizar Sucursal</h1><br>
+        <div class="-mx-3 md:flex mb-6">
+            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
+                    Nombre *
+                </label>
+                <input value="<?php echo $sucursal->nombre_sucursal ?>" name='txtNombre' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Coca Cola" required>
+            </div>
+            <div class="md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+                    Encargado *
+                </label>
+                <input value="<?php echo $sucursal->encargado_sucursal ?>" name="txtPropietario" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="Lemus Solares" required>
+            </div>
+        </div>
+        <div class="-mx-3 md:flex mb-6">
+            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
+                    Teléfono *
+                </label>
+                <input value="<?php echo $sucursal->telefono_sucursal ?>" name='txtTelefono' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="2222 2222" required>
+            </div>
+            <div class="md:w-1/2 px-3">
+                <div class="md:w-full px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                        Sucursales *
+                    </label>
+                    <div class="selector-region">
+                        <select id='sucursales' name='txtEmpresa' class=" block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" required>
+                            <option selected value="<?php echo $sucursal->id_company ?>"><?php echo $sucursal->nombre_company ?></option>
+                            <?php foreach ($companies as $company) : ?>
+                                <option value="<?php echo $company->id_company ?>"><?php echo $company->nombre_company ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="-mx-3 md:flex mb-6">
+            <div class="md:w-full px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                    Region *
+                </label>
+                <select id="region" name='txtRegion' class=" block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" required>
+                    <option selected value="<?php echo $sucursal->id_region; ?>"><?php echo $sucursal->nombre; ?></option>
+                    <?php foreach ($regiones as $region) : ?>
+                        <option value="<?php echo $region->id_region ?>"><?php echo $region->nombre ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="-mx-3 md:flex mb-6">
+            <div class="md:w-full px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                    Departamento *
+                </label>
+                <select id="departamentos" name='txtDepartamento' class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" required>
+                    <option selected value="<?php echo $sucursal->id_departamento; ?>"><?php echo $sucursal->nombre_departamento; ?></option>
+                    <?php foreach ($departamentos as $depto) : ?>
+                        <option value="<?php echo $depto->id_departamento; ?>"><?php echo $depto->nombre_departamento; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="-mx-3 md:flex mb-6">
+            <div class="md:w-full px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                    Municipio *
+                </label>
+                <select id="municipios" name='txtMunicipio' class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" required>
+                    <option selected value="<?php echo $sucursal->id_municipio; ?>"><?php echo $sucursal->nombre_municipio; ?></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center ">
+            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <button type="submit" class="text-center focus:outline-none text-white text-sm py-2.5 px-12 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">Registrar</button>
+            </div>
+        </div>
+    </div>
+</form>
+<br><br>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('#departamentos').click(function() {
+            $('#municipios').empty();
+        });
+
+        $('#departamentos').change(function() {
+            let departamento = $('#departamentos').val();
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url() ?>Comun/getMunicipiosJSON/" + departamento,
+                success: function(response) {
+                    let dataItems = JSON.parse(response)
+                    jQuery.each(dataItems, function(index, item) {
+                        $('#municipios').append('<option value=' + item.id_municipio + '>' + item.nombre_municipio + '</option>');
+                    });
+                }
+            });
+        });
+
+    });
+</script>

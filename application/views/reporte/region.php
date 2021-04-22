@@ -1,0 +1,28 @@
+<form class="flex items-center justify-center flex-1" method='POST' action="<?php echo base_url(); ?>Reportes/region">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+        <h1 class="text-3xl font-bold text-gray-500 text-center">Reporte por región</h1><br>
+
+        <div class="-mx-3 md:flex mb-6">
+            <div class="md:w-full px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                    Region *
+                </label>
+                <div class="selector-region">
+                    <select id='txtbuscar' name='txtbuscar' class=" block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" required>
+                        <option value="">Seleecion una region</option>
+                        <?php foreach ($regiones as $region) : ?>
+                            <option value="<?php echo $region->id_region ?>"><?php echo $region->nombre ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center ">
+            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                <button type="submit" class="text-center focus:outline-none text-white text-sm py-2.5 px-12 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">Registrar</button>
+            </div>
+        </div>
+    </div>
+</form>
+<br><br>
