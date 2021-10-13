@@ -1,13 +1,14 @@
 <?php
 
-class User_model extends CI_Model{
+class User_model extends CI_Model
+{
 
 
-    public function create_user( $data ){
+    public function create_user($data)
+    {
 
         $this->db->insert('users', $data);
         return TRUE;
-
     }
 
     public function edit_user($idUser, $data)
@@ -17,9 +18,10 @@ class User_model extends CI_Model{
         return TRUE;
     }
 
-    public function delete_user($data, $id){
+    public function delete_user($data, $id)
+    {
         $this->db->where('id', $id);
-        $this->db->update('users', $data );
+        $this->db->update('users', $data);
         return TRUE;
     }
 
@@ -56,24 +58,24 @@ class User_model extends CI_Model{
 
         $db_password = $result->row()->password;
 
-        if(password_verify($password, $db_password)){
+        if (password_verify($password, $db_password)) {
 
             return $result->row();
-        }
-        else{
+        } else {
             return FALSE;
         }
     }
 
-    public function get_users(){
+    public function get_users()
+    {
 
         // armamos la consulta
-        $query = $this->db-> query('SELECT id, username FROM users');
+        $query = $this->db->query('SELECT id, username FROM users');
 
         // si hay resultados
         if ($query->num_rows() > 0) {
             // almacenamos en una matriz bidimensional
-            foreach($query->result() as $row)
+            foreach ($query->result() as $row)
                 $users[htmlspecialchars($row->id, ENT_QUOTES)] =
                     htmlspecialchars($row->username, ENT_QUOTES);
 
@@ -90,10 +92,9 @@ class User_model extends CI_Model{
         $this->db->update('users', $data);
 
         return TRUE;
-
     }
 
-    public function get_users_info( $porpagina, $desde, $id)
+    public function get_users_info($porpagina, $desde, $id)
     {
         $this->db->select('
            
@@ -118,17 +119,15 @@ class User_model extends CI_Model{
         $this->db->join('users', 'users.empleado = empleado.id');
 
         $this->db->limit($porpagina, $desde);
-        if ( $id != null )
-        {
-            $this->db->where('empleado.id', $id );
+        if ($id != null) {
+            $this->db->where('empleado.id', $id);
         }
         $this->db->where('users.estado', 1);
         $query = $this->db->get();
 
-        if ($query->num_rows() < 1){
+        if ($query->num_rows() < 1) {
             return FALSE;
-        }
-        else{
+        } else {
             return $query->result();
         }
     }
@@ -138,7 +137,7 @@ class User_model extends CI_Model{
     public function get_user_info($id)
     {
         $this->db->from('users');
-        $this->db->where('id',$id);
+        $this->db->where('id', $id);
 
         $query = $this->db->get();
 
@@ -149,4 +148,30 @@ class User_model extends CI_Model{
         return $query->row();
     }
 
+
+
+    public function get_empleados_info()
+    {
+        $this->db->select('
+           
+           empleado.id as idEmpleado,
+           empleado.nombres,
+           empleado.apellidos,
+           empleado.telefono,           
+           users.id as idUser,
+           users.username       
+            ');
+        $this->db->from('empleado');
+        // $this->db->join('tipo_empleado', 'tipo_empleado.id = empleado.tipo_empleado');
+
+        $this->db->join('users', 'users.empleado = empleado.id');
+        $this->db->where('users.estado', 1);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 1) {
+            return $query->result();
+        } else {
+            return FALSE;
+        }
+    }
 }

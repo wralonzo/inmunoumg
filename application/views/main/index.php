@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Diaco</title>
+  <title><?php echo (isset($title)) ? $title : 'UMG' ?></title>
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/Logo.png" />
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
@@ -26,7 +26,7 @@
       </div>
 
       <!-- Sidebar -->
-      <div class="flex flex-shrink-0 transition-all">
+      <div class="flex flex-shrink-0 transition-all noprint">
         <div x-show="isSidebarOpen" @click="isSidebarOpen = false" class="fixed inset-0 z-10 bg-black bg-opacity-50 lg:hidden"></div>
         <div x-show="isSidebarOpen" class="fixed inset-y-0 z-10 w-16 bg-white"></div>
 
@@ -71,9 +71,9 @@
               <img src="<?php echo base_url(); ?>assets/img/Logo.png" alt="DIACO " />
             </a>
           </div>
-          <div class="flex flex-col items-center flex-1 p-2 space-y-4">
+          <div class="flex flex-col items-center flex-1 p-2 space-y-4 noprint">
             <!-- Menu button -->
-            <button @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
+            <button title="Página de inicio" @click="(isSidebarOpen && currentSidebarTab == 'linksTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'linksTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'linksTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
               <span class="sr-only">Toggle sidebar</span>
               <svg aria-hidden="true" class="w-6 h-6" xmlns="https://lh3.googleusercontent.com/proxy/KhhrsgfhyrW2sa39MNQEAXuAaw1PI0h0dJDITA251kENDsl9X6KvoDNqhAtRFHYgp4Mpl-PofohVQhvyswCH2UL-HiY9Zbonm6udGi_2b9NItSnUYaEU" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
@@ -105,61 +105,70 @@
                     </svg>
                   </button> -->
             <!-- Notifications button -->
-            <button @click="(isSidebarOpen && currentSidebarTab == 'notificationsTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'notificationsTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'notificationsTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
+
+
+            <!-- Catalogo 
+            Boton poscionado en la barra de navegacion, 
+            cuando se pulsa muestra las opciones de vacunas, departamental y distritos-->
+            <button title="Catalogo" @click="(isSidebarOpen && currentSidebarTab == 'catalogoTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'catalogoTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'catalogoTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
+              <span class="sr-only">Catalogo</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <!-- company -->
+            <button title="Padres" @click="(isSidebarOpen && currentSidebarTab == 'companyTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'companyTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'companyTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
+              <span class="sr-only">Padres</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+              </svg>
+            </button>
+
+
+            <a title="Control de vacunacion" href="<?php echo base_url() ?>ControlVacunacion" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'controlvacunacion') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
+              <span class="sr-only">Control de vacunación</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 0zm0-6a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 5.414 5.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            </a>
+
+
+            <button title="Reportes" @click="(isSidebarOpen && currentSidebarTab == 'reportes') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'reportes'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'reportes') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
+              <span class="sr-only">Reportes</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+              </svg>
+            </button>
+            <!-- company -->
+            <!-- <button title="Pacientes" @click="(isSidebarOpen && currentSidebarTab == 'sucursalesTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'sucursalesTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'sucursalesTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
+              <span class="sr-only">Pacientes</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </button> -->
+            <a title="Usuarios" href="<?php echo base_url() ?>Login" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'notificationsTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
               <span class="sr-only">usuarios</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
               </svg>
-            </button>
+            </a>
 
-            <!-- company -->
-            <button @click="(isSidebarOpen && currentSidebarTab == 'companyTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'companyTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'companyTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
-              <span class="sr-only">Negocios</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd" />
-              </svg>
-            </button>
-            <!-- company -->
-            <button @click="(isSidebarOpen && currentSidebarTab == 'sucursalesTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'sucursalesTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'sucursalesTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
-              <span class="sr-only">Sucursales</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10.496 2.132a1 1 0 00-.992 0l-7 4A1 1 0 003 8v7a1 1 0 100 2h14a1 1 0 100-2V8a1 1 0 00.496-1.868l-7-4zM6 9a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1zm3 1a1 1 0 012 0v3a1 1 0 11-2 0v-3zm5-1a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1z" clip-rule="evenodd" />
-              </svg>
-            </button>
+            <!-- User avatar -->
+            <div class="relative flex items-center flex-shrink-0 p-2" x-data="{ isOpen: false }">
+              <button @click="isOpen = !isOpen; $nextTick(() => {isOpen ? $refs.userMenu.focus() : null})" class="transition-opacity rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
+                </svg>
+                <span class="sr-only">User menu</span>
+              </button>
+              <div x-show="isOpen" @click.away="isOpen = false" @keydown.escape="isOpen = false" x-ref="userMenu" tabindex="-1" class="absolute w-48 py-1 mt-2 origin-bottom-left bg-white rounded-md shadow-lg left-10 bottom-14 focus:outline-none" role="menu" aria-orientation="vertical" aria-label="user menu">
+                <a href="<?php echo base_url(); ?>Login/miPerfil/<?php echo $this->session->userdata('id_user'); ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Mi Perfil</a>
 
-            <!-- queja -->
-            <button @click="(isSidebarOpen && currentSidebarTab == 'quejaTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'quejaTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'quejaTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
-              <span class="sr-only">Queja</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </button>
+                <a href="<?php echo base_url(); ?>Login/cambiar_password/<?php echo $this->session->userdata('id_user') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Cambiar Clave</a>
 
-            <!-- reporte -->
-            <button @click="(isSidebarOpen && currentSidebarTab == 'reporteTab') ? isSidebarOpen = false : isSidebarOpen = true; currentSidebarTab = 'reporteTab'" class="p-2 transition-colors rounded-lg shadow-md hover:bg-indigo-800 hover:text-white focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2" :class="(isSidebarOpen && currentSidebarTab == 'reporteTab') ? 'text-white bg-indigo-600' : 'text-gray-500 bg-white'">
-              <span class="sr-only">Reporte</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd" />
-              </svg>
-            </button>
-          </div>
-
-          <!-- User avatar -->
-          <div class="relative flex items-center flex-shrink-0 p-2" x-data="{ isOpen: false }">
-            <button @click="isOpen = !isOpen; $nextTick(() => {isOpen ? $refs.userMenu.focus() : null})" class="transition-opacity rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-              </svg>
-              <span class="sr-only">User menu</span>
-            </button>
-            <div x-show="isOpen" @click.away="isOpen = false" @keydown.escape="isOpen = false" x-ref="userMenu" tabindex="-1" class="absolute w-48 py-1 mt-2 origin-bottom-left bg-white rounded-md shadow-lg left-10 bottom-14 focus:outline-none" role="menu" aria-orientation="vertical" aria-label="user menu">
-              <a href="<?php echo base_url(); ?>Login/miPerfil/<?php echo $this->session->userdata('id_empleado'); ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Mi Perfil</a>
-
-              <a href="<?php echo base_url(); ?>Login/cambiar_password/<?php echo $this->session->userdata('id_user') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Cambiar Clave</a>
-
-              <a href="<?php echo base_url(); ?>Login/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Salir</a>
+                <a href="<?php echo base_url(); ?>Login/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Salir</a>
+              </div>
             </div>
-          </div>
         </nav>
 
         <div x-transition:enter="transform transition-transform duration-300" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transform transition-transform duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" x-show="isSidebarOpen" class="fixed inset-y-0 left-0 z-10 flex-shrink-0 w-64 bg-white border-r-2 border-indigo-100 shadow-lg sm:left-16 rounded-tr-3xl rounded-br-3xl sm:w-72 lg:static lg:w-64">
@@ -180,7 +189,7 @@
                           d="M7.691 34.703L13.95 28.2 32.09 52h8.087L18.449 23.418 38.594.813h-8.157L7.692 26.125V.812H.941V52h6.75V34.703zm27.61-7.793h17.156v-5.308H35.301v5.308zM89.19 13v22.512c0 3.703-1.02 6.574-3.058 8.613-2.016 2.04-4.934 3.059-8.754 3.059-3.773 0-6.68-1.02-8.719-3.059-2.039-2.063-3.058-4.945-3.058-8.648V.813h-6.68v34.874c.047 5.297 1.734 9.458 5.062 12.481 3.328 3.023 7.793 4.535 13.395 4.535l1.793-.07c5.156-.375 9.234-2.098 12.234-5.168 3.024-3.07 4.547-7.02 4.57-11.848V13h-6.785zM89 8h7V1h-7v7z"
                         />
                       </svg> -->
-                <img class="w-24 h-auto" src="<?php echo base_url(); ?>assets/img/Logo.png" alt="Diaco" />
+                <img class="w-24 h-auto" src="<?php echo base_url(); ?>assets/img/Logo.png" alt="UMG" />
               </a>
             </div>
 
@@ -204,7 +213,7 @@
               </a> -->
             </div>
 
-            <div class="flex-shrink-0 p-4 mt-10">
+            <div class="flex-shrink-0 p-4 mt-10 noprint">
               <div class="hidden p-2 space-y-6 bg-gray-100 rounded-lg md:block">
                 <!-- <img
                         aria-hidden="true"
@@ -253,10 +262,11 @@
             </a>
           </section>
 
-          <!-- negocios -->
+
+          <!-- Padres -->
           <section x-show="currentSidebarTab == 'companyTab'" class="px-4 py-6">
-            <h2 class="text-xl">Negocios</h2><br>
-            <a href="<?php echo base_url(); ?>Company/register" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+            <h2 class="text-xl">Pacientes</h2><br>
+            <a title="Nuevo" href="<?php echo base_url(); ?>Pacientes/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
               <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -264,10 +274,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </span>
-              <span>Nuevo</span>
+              <span>Pacientes</span>
             </a><br>
 
-            <a href="<?php echo base_url(); ?>Company/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+            <a title="Listar" href="<?php echo base_url(); ?>Padres/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
               <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -275,14 +285,14 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </span>
-              <span>Listar</span>
+              <span>Padres</span>
             </a>
           </section>
 
           <!-- negocios -->
           <section x-show="currentSidebarTab == 'sucursalesTab'" class="px-4 py-6">
-            <h2 class="text-xl">Sucursales</h2><br>
-            <a href="<?php echo base_url(); ?>Sucursal/register" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+            <h2 class="text-xl">Pacientes</h2><br>
+            <a href="<?php echo base_url(); ?>Pacientes/register" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
               <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -293,7 +303,7 @@
               <span>Nueva</span>
             </a><br>
 
-            <a href="<?php echo base_url(); ?>Sucursal/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+            <a href="<?php echo base_url(); ?>Pacientes/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
               <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -305,10 +315,11 @@
             </a>
           </section>
 
-          <!-- Queja -->
-          <section x-show="currentSidebarTab == 'quejaTab'" class="px-4 py-6">
-            <h2 class="text-xl">Quejas</h2><br>
-            <a href="<?php echo base_url(); ?>Queja/register" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+
+          <!-- Vacunas -->
+          <section x-show="currentSidebarTab == 'catalogoTab'" class="px-4 py-6">
+            <h2 class="text-xl">Departamental</h2><br>
+            <a href="<?php echo base_url(); ?>Departamental/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
               <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -316,10 +327,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </span>
-              <span>Nueva Queja</span>
+              <span>Departamental</span>
             </a><br>
 
-            <a href="<?php echo base_url(); ?>Queja/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+            <a href="<?php echo base_url(); ?>Vacunas/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
               <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -327,69 +338,41 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </span>
-              <span>Listar</span>
+              <span>Vacunas</span>
+            </a>
+            <br>
+            <a href="<?php echo base_url(); ?>Distritos/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+              <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </span>
+              <span>Distritos</span>
+            </a>
+          </section>
+
+          <section x-show="currentSidebarTab == 'controlvacunacion'" class="px-4 py-6">
+            <h2 class="text-xl">Control de vacunación</h2><br>
+
+
+            <a href="<?php echo base_url(); ?>ControlVacunacion/" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+              <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </span>
+              <span>Lista</span>
             </a>
           </section>
 
           <!-- reportes -->
-          <section x-show="currentSidebarTab == 'reporteTab'" class="px-4 py-6">
+          <section x-show="currentSidebarTab == 'reportes'" class="px-4 py-6">
             <h2 class="text-xl">Reportes</h2><br>
-            <a href="<?php echo base_url(); ?>Reportes/fechas" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
-              <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                </svg>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-              </span>
-              <span>Por Fechas</span>
-            </a>
             <br>
-            <a href="<?php echo base_url(); ?>Reportes/departamento" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
-              <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-              </span>
-              <span>Departamentos</span>
-            </a>
-            <br>
-            <a href="<?php echo base_url(); ?>Reportes/municipio" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
-              <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-              </span>
-              <span>Municipio</span>
-            </a>
-            <br>
-            <a href="<?php echo base_url(); ?>Reportes/region" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
-              <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-              </span>
-              <span>Región</span>
-            </a>
-            <br>
-            <a href="<?php echo base_url(); ?>Reportes/sinQuejas" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
-              <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                </svg>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-              </span>
-              <span>Comercios sin quejas</span>
-            </a>
-
-            <!-- <br>
             <a href="<?php echo base_url(); ?>Reportes/conteos" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
               <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -398,8 +381,18 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               </span>
-              <span>Conteos</span>
-            </a> -->
+              <span>Por Género</span>
+            </a><br>
+            <a href="<?php echo base_url(); ?>Reportes/porfechas" class="flex items-center w-full space-x-2 text-white bg-indigo-600 rounded-lg">
+              <span aria-hidden="true" class="p-2 bg-indigo-700 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </span>
+              <span>Dosis por mes</span>
+            </a>
           </section>
 
         </div>

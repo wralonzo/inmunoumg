@@ -6,8 +6,7 @@
  * Time: 14:11
  */
 
-class Company_model extends CI_Model
-{
+class Company_model extends CI_Model{
 
 
     public function get_all(){
@@ -73,4 +72,3 @@ class Company_model extends CI_Model
 
     }
 }
-?>

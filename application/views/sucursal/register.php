@@ -25,19 +25,19 @@
                 <input name='txtTelefono' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="2222 2222" required>
             </div>
             <div class="md:w-1/2 px-3">
-            <div class="md:w-full px-3">
-                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
-                    Empresa *
-                </label>
-                <div class="selector-region">
-                    <select id='sucursales' name='txtEmpresa' class=" block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" required>
-                        <option value="">Seleecion una Empresa</option>
-                        <?php foreach ($companies as $company) : ?>
-                            <option value="<?php echo $company->id_company ?>"><?php echo $company->nombre_company ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                <div class="md:w-full px-3">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                        Empresa *
+                    </label>
+                    <div class="selector-region">
+                        <select id='sucursales' name='txtEmpresa' class=" block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" required>
+                            <option value="">Seleecion una Empresa</option>
+                            <?php foreach ($companies as $company) : ?>
+                                <option value="<?php echo $company->id_company ?>"><?php echo $company->nombre_company ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
         <div class="-mx-3 md:flex mb-6">
@@ -48,8 +48,8 @@
                 <div class="selector-region">
                     <select id='region' name='txtRegion' class=" block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state" required>
                         <option value="">Seleecion una region</option>
-                        <?php foreach($regiones as $region): ?>
-                            <option value="<?php echo $region->id_region ?>"><?php echo $region->nombre?></option>
+                        <?php foreach ($regiones as $region) : ?>
+                            <option value="<?php echo $region->id_region ?>"><?php echo $region->nombre ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

@@ -23,9 +23,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://inmonuumg.x10.mx/umg/';
+// $config['base_url'] = 'http://inmonuumg.x10.mx/umg/';
 
-// $config['base_url'] = 'http://localhost/inmuniumg/';
+$config['base_url'] = 'http://localhost/inmuniumg/';
 
 /*
 |--------------------------------------------------------------------------

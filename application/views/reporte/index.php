@@ -1,200 +1,143 @@
-<!--Regular Datatables CSS-->
-<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-<!--Responsive Extension Datatables CSS-->
-<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+<div class="antialiased sans-serif bg-gray-200 w-lg min-h-screen ">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        body {
+            font-family: 'IBM Plex Mono', sans-serif;
+        }
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        [x-cloak] {
+            display: none;
+        }
 
-<!--Datatables -->
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+        .line {
+            background: repeating-linear-gradient(to bottom,
+                    #eee,
+                    #eee 1px,
+                    #fff 1px,
+                    #fff 8%);
+        }
+
+        .tick {
+            background: repeating-linear-gradient(to right,
+                    #eee,
+                    #eee 1px,
+                    #fff 1px,
+                    #fff 5%);
+        }
+    </style>
 
 
 
-<style>
-    /*Form fields*/
-    .dataTables_wrapper select,
-    .dataTables_wrapper .dataTables_filter input {
-        color: #4a5568;
-        /*text-gray-700*/
-        padding-left: 1rem;
-        /*pl-4*/
-        padding-right: 1rem;
-        /*pl-4*/
-        padding-top: .5rem;
-        /*pl-2*/
-        padding-bottom: .5rem;
-        /*pl-2*/
-        line-height: 1.25;
-        /*leading-tight*/
-        border-width: 2px;
-        /*border-2*/
-        border-radius: .25rem;
-        border-color: #edf2f7;
-        /*border-gray-200*/
-        background-color: #edf2f7;
-        /*bg-gray-200*/
-    }
+    <div x-data="app()" x-cloak class="px-4">
+        <div class="w-3/6 h-3/6 mx-auto py-10">
+            <div class="shadow p-6 rounded-lg bg-white">
+                <div class="md:flex md:justify-between md:items-center">
+                    <div>
+                        <h2 class="text-xl text-gray-800 font-bold leading-tight">Dosis por mes</h2>
+                        <p class="mb-2 text-gray-600 text-sm">Meses</p>
+                    </div>
 
-    /*Row Hover*/
-    table.dataTable.hover tbody tr:hover,
-    table.dataTable.display tbody tr:hover {
-        background-color: #ebf4ff;
-        /*bg-indigo-100*/
-    }
+                    <!-- Legends -->
+                    <div class="mb-4">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-600 mr-2 rounded-full"></div>
+                            <div class="text-sm text-gray-700">Dosis</div>
+                        </div>
+                    </div>
+                </div>
 
-    /*Pagination Buttons*/
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        font-weight: 700;
-        /*font-bold*/
-        border-radius: .25rem;
-        /*rounded*/
-        border: 1px solid transparent;
-        /*border border-transparent*/
-    }
 
-    /*Pagination Buttons - Current selected */
-    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-        color: #fff !important;
-        /*text-white*/
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-        /*shadow*/
-        font-weight: 700;
-        /*font-bold*/
-        border-radius: .25rem;
-        /*rounded*/
-        background: #667eea !important;
-        /*bg-indigo-500*/
-        border: 1px solid transparent;
-        /*border border-transparent*/
-    }
-
-    /*Pagination Buttons - Hover */
-    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-        color: #fff !important;
-        /*text-white*/
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-        /*shadow*/
-        font-weight: 700;
-        /*font-bold*/
-        border-radius: .25rem;
-        /*rounded*/
-        background: #667eea !important;
-        /*bg-indigo-500*/
-        border: 1px solid transparent;
-        /*border border-transparent*/
-    }
-
-    /*Add padding to bottom border */
-    table.dataTable.no-footer {
-        border-bottom: 1px solid #e2e8f0;
-        /*border-b-1 border-gray-300*/
-        margin-top: 0.75em;
-        margin-bottom: 0.75em;
-    }
-
-    /*Change colour of responsive icon*/
-    table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
-    table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
-        background-color: #667eea !important;
-        /*bg-indigo-500*/
-    }
-</style>
-<div class="mx-auto px-12">
-    <!--Card-->
-    <!-- <p class="text-2xl text-purple-500 text-opacity-100">Quejas</p> -->
-    <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
-        <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-            <!-- <a href="<?php echo base_url(); ?>Sucursal/register" class="text-center focus:outline-none text-white text-sm py-2.5 px-12 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">Nueva</a> -->
-        </div><br>
-        <button class="noprint text-center focus:outline-none text-white text-sm py-2.5 px-12 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg" onclick="window.print()">Print</button>
-
-        <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
-            <thead>
-                <tr>
-                    <th data-priority="1">#</th>
-                    <th data-priority="2">Sucursal</th>
-                    <th data-priority="3">Encargado</th>
-                    <th data-priority="3">Propietario</th>
-                    <th data-priority="4">Empresa</th>
-                    <th data-priority="4">Teléfono</th>
-                    <th data-priority="4">Region</th>
-                    <th data-priority="5">Departamento</th>
-                    <th data-priority="6">Municipio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $contador = 0;
-                foreach ($response as $queja) { ?>
-                    <tr class="">
-                        <td align="center"><?php echo $contador = $contador + 1; ?></td>
-                        <td align="center"><?php echo $queja->nombre_sucursal; ?></td>
-                        <td align="center"><?php echo $queja->encargado_sucursal; ?></td>
-                        <td align="center"><?php echo $queja->propietario_company; ?></td>
-                        <td align="center"><?php echo $queja->nombre_company; ?></td>
-                        <td align="center"><?php echo $queja->telefono_sucursal; ?></td>
-                        <td align="center"><?php echo $queja->nombre; ?></td>
-                        <td align="center"><?php echo $queja->nombre_departamento; ?></td>
-                        <td align="center"><?php echo $queja->nombre_municipio; ?></td>
-                        <!-- <td class="py-3 px-6 text-center" align="center">
-                            <div class="flex item-center justify-center">
-                                <a href="<?php echo base_url(); ?>Queja/update/<?php echo $queja->id_queja ?>">
-                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                        </svg>
+                <div class="line my-8 relative">
+                    <!-- Tooltip -->
+                    <template x-if="tooltipOpen == true">
+                        <div x-ref="tooltipContainer" class="p-0 m-0 z-10 shadow-lg rounded-lg absolute h-auto block" :style="`bottom: ${tooltipY}px; left: ${tooltipX}px`">
+                            <div class="shadow-xs rounded-lg bg-white p-2">
+                                <div class="flex items-center justify-between text-sm">
+                                    <div></div>
+                                    <div class="font-bold ml-2">
+                                        <span x-html="tooltipContent"></span>
                                     </div>
-                                </a>
-                                <a href="<?php echo base_url(); ?>Queja/delete/<?php echo $queja->id_queja ?>">
-
-                                    <div class="w-4 mr-8 transform hover:text-purple-500 hover:scale-110">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                    </div>
-                                </a>
+                                </div>
                             </div>
-                        </td> -->
-                    </tr>
+                        </div>
+                    </template>
 
-                    <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
+                    <!-- Bar Chart -->
+                    <div class="flex -mx-2 items-end mb-2">
+                        <template x-for="data in chartData">
 
-                    </tr>
-                <?php } ?>
-            </tbody>
+                            <div class="px-2 w-1/6">
+                                <div :style="`height: ${data}px`" class="transition ease-in duration-200 bg-blue-600 hover:bg-blue-400 relative" @mouseenter="showTooltip($event); tooltipOpen = true" @mouseleave="hideTooltip($event)">
+                                    <div x-text="data" class="text-center absolute top-0 left-0 right-0 -mt-6 text-gray-800 text-sm"></div>
+                                </div>
+                            </div>
 
-        </table>
+                        </template>
+                    </div>
 
+                    <!-- Labels -->
+                    <div class="border-t border-gray-400 mx-auto" :style="`height: 1px; width: ${ 100 - 1/chartData.length*100 + 3}%`"></div>
+                    <div class="flex -mx-2 items-end">
+                        <template x-for="data in labels">
+                            <div class="px-2 w-1/6">
+                                <div class="bg-red-600 relative">
+                                    <div class="text-center absolute top-0 left-0 right-0 h-2 -mt-px bg-gray-400 mx-auto" style="width: 1px"></div>
+                                    <div x-text="data" class="text-center absolute top-0 left-0 right-0 mt-3 text-gray-700 text-sm"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
 
+                </div>
+            </div>
+        </div>
     </div>
-    <!--/Card-->
 
+    <script>
+        function app() {
+            return {
+                chartData: [
+                    <?php echo $meses->Ene ?>,
+                    <?php echo $meses->Feb ?>,
+                    <?php echo $meses->Mar ?>,
+                    <?php echo $meses->Abr ?>,
+                    <?php echo $meses->May ?>,
+                    <?php echo $meses->Jun ?>,
+                    <?php echo $meses->Jul ?>,
+                    <?php echo $meses->Ago ?>,
+                    <?php echo $meses->Sep ?>,
+                    <?php echo $meses->Oct ?>,
+                    <?php echo $meses->Nov ?>,
+                    <?php echo $meses->Dic ?>,
+                ],
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
 
-</div>
-<script id="rendered-js">
-    $(document).ready(function() {
-
-        var table = $('#example').DataTable({
-            responsive: true,
-
-            dom: 'Bfrtip',
-            buttons: [{
-                extend: 'pdf',
-                text: 'Save current page',
-                exportOptions: {
-                    modifier: {
-                        page: 'current'
-                    }
+                tooltipContent: '',
+                tooltipOpen: false,
+                tooltipX: 0,
+                tooltipY: 0,
+                showTooltip(e) {
+                    console.log(e);
+                    this.tooltipContent = e.target.textContent
+                    this.tooltipX = e.target.offsetLeft - e.target.clientWidth;
+                    this.tooltipY = e.target.clientHeight + e.target.clientWidth;
+                },
+                hideTooltip(e) {
+                    this.tooltipContent = '';
+                    this.tooltipOpen = false;
+                    this.tooltipX = 0;
+                    this.tooltipY = 0;
                 }
-            }]
-
-
-        });
-
-        columns.adjust();
-        responsive.recalc();
-    });
-    //# sourceURL=pen.js
-</script>
+            }
+        }
+    </script>
+    <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+        <div>
+            <a title="Buy me a beer" href="#" onclick="window.print()" class="noprint block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
+                <img class="object-cover object-center w-full h-full rounded-full block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12" src=" <?php echo base_url(); ?>assets/img/Logo.png" />
+            </a>
+        </div>
+    </div>
+</div>
