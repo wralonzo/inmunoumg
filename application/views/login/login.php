@@ -1,69 +1,54 @@
-<html>
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
 
 <head>
-    <title>Login Form Using Materialize Css</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <style type="text/css">
-        body {
-            padding: 0;
-            margin: 0;
-            background: #ddd;
-        }
-
-        .btn {
-            margin-top: 10px;
-
-        }
-
-        .container {
-            margin: 100px auto;
-            width: 35%;
-
-        }
-
-        @media(max-width: 952px) {
-            .container {
-                width: 60%;
-            }
-        }
-
-        @media(max-width: 475px) {
-            .container {
-                width: 80%;
-            }
-        }
-    </style>
+    <title>Diaco</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
-        <div class="row card hoverable">
-            <div class="card-content ">
-                <h4 class="center blue-text">Login Form</h4>
-                <form class="row s12">
-                    <div class="col s12">
-                        <div class="input-field">
-                            <input type="text" name="" placeholder="Username*">
-                        </div>
+    <section class="min-h-screen flex flex-col">
+        <div class="flex flex-1 items-center justify-center">
+            <div class="rounded-lg sm:border-2 px-4 lg:px-24 py-16 lg:max-w-xl sm:max-w-md w-full text-center">
+                <div class="fadeIn first">
+
+                </div>
+                <form class="text-center" method="post" action="<?php echo base_url(); ?>Autenticar/login">
+                    <h1 class="font-bold tracking-wider text-3xl mb-8 w-full text-gray-600">
+                        Bienvenido
+                    </h1>
+                    <?php if ($this->session->flashdata('res_login')) : ?>
+                        <p class="text-2xl text-red-500 text-opacity-100"><?php echo $this->session->flashdata('res_login'); ?></p>
+                    <?php endif ?>
+                    <?php if ($this->session->flashdata('no_access')) : ?>
+                        <p class="text-2xl text-red-500 text-opacity-100"><?php echo $this->session->flashdata('no_access'); ?></p>
+                    <?php endif ?>
+                    <div class="py-2 text-left">
+                        <input name='txtEmail' type="email" class="bg-gray-200 border-2 border-gray-100 focus:outline-none bg-gray-100 block w-full py-2 px-4 rounded-lg focus:border-gray-700 " placeholder="Email" />
                     </div>
-                    <div class="col s12">
-                        <div class="input-field">
-                            <input type="password" name="" placeholder="Password*">
-                        </div>
+                    <div class="py-2 text-left">
+                        <input name='txtPassword' type="password" class="bg-gray-200 border-2 border-gray-100 focus:outline-none bg-gray-100 block w-full py-2 px-4 rounded-lg focus:border-gray-700 " placeholder="Password" />
                     </div>
-                    <div class="col s12">
-                        <p><label><input type="checkbox"></label></p>
-                    </div>
-                    <div class="col s12 center">
-                        <button type="button" class="btn btn-large waves-effect waves-light blue">Login<i class="material-icons right">send</i></button>
+                    <div class="py-2">
+                        <button type="submit" class="border-2 border-gray-100 focus:outline-none bg-purple-600 text-white font-bold tracking-wider block w-full p-2 rounded-lg focus:border-gray-700 hover:bg-purple-700">
+                            Ingresar
+                        </button>
                     </div>
                 </form>
+                <div class="text-center">
+                    <!-- <a href="#" class="hover:underline">Forgot password?</a> -->
+                </div>
+                <div class="text-center mt-12">
+                    <span>
+                        <!-- Don't have an account? -->
+                    </span>
+                    <!-- <a href="#" class="font-light text-md text-indigo-600 underline font-semibold hover:text-indigo-800">Create One</a> -->
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
 </body>
 
 </html>
